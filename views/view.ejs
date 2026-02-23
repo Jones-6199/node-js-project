@@ -236,12 +236,12 @@
           <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="/">Home</a></li>
             <li class="breadcrumb-item active" aria-current="page">
-              Benziane Younes
+              <%=data.firstName  %> <%= data.lastName %>
             </li>
           </ol>
 
           <p class=" ">
-            <span class="fw-medium fs-6">Id :</span> 6487021520bcf1af6319484c
+            <span class="fw-medium fs-6">Id :</span> <%= data.id  %>
           </p>
         </nav>
 
@@ -252,38 +252,38 @@
           <thead>
             <tr>
               <th scope="col">First Name</th>
-              <th class="fw-normal" scope="col">Ali</th>
+              <th class="fw-normal" scope="col"> <%= data.firstName  %> </th>
             </tr>
           </thead>
           <tbody>
             <tr>
               <th scope="row">Last Name</th>
-              <td>Hassan</td>
+              <td> <%= data.lastName  %> </td>
             </tr>
 
             <tr>
               <th scope="row">Telephone</th>
-              <td>Test1</td>
+              <td> <%= data.customerPhoneNumber  %> </td>
             </tr>
 
             <tr>
               <th scope="row">Email</th>
-              <td>ali7assan@gmail.com</td>
+              <td> <%= data.customerEmail  %> </td>
             </tr>
 
             <tr>
               <th scope="row">Gender</th>
-              <td>Test3</td>
+              <td> <%= data.customerGender  %> </td>
             </tr>
 
             <tr>
               <th scope="row">Age</th>
-              <td>Test4</td>
+              <td> <%= data.customerAge  %>  </td>
             </tr>
 
             <tr>
               <th scope="row">Country</th>
-              <td>Test5</td>
+              <td> <%= data.customerCountry  %> </td>
             </tr>
 
             <tr>

@@ -11,8 +11,9 @@ app.use(express.static("public"))
 
  
 
-const User = require("./models/users");
-const Special = require("./models/specialUsers")
+const Customer = require("./models/addCustomer")
+
+
 
 
 
@@ -70,14 +71,26 @@ app.post("/", (req, res) => {
 
 /* home */
 app.get("/", (req, res) => {
-  res.render("index" )
+ 
+
+  Customer.find().then((result) => {
+    res.render("index" , {data: result})
+  }).catch((err) => {
+    console.log(`operation failed due ${err}`)
+  })
 });   
 /* home */
 
 
 /*  view user */
 app.get("/user/view.html", (req, res) => {
-  res.render("view" )
+  
+
+  Customer.find().then((result) => {
+    res.render("view", {data: result} )
+  }).catch((err) => {
+    console.log(`operation failed due ${err}`)
+  })
 });   
 /*  view user */
 
@@ -90,17 +103,38 @@ app.get("/user/edit.html", (req, res) => {
 /*  edit user */
 
 
-
+/* add customer */
 app.get("/user/add.html", (req, res) => {
   res.render("add" )
+
+
+  
 });   
+app.post("/user/add.html", (req,res) => {
+  const newCustomer = new Customer (req.body)
+  console.log(req.body)
+  newCustomer.save().then(() => {
+    console.log("customer added to db succesfully")
+  }).catch(() => {
+    console.log("failed saving customer")
+  })
+  res.redirect("/user/add.html")
+})
+/* add customer */
 
 
 
 
 
-
-
+app.get("/user/:id",(req,res) => {
+ 
+  Customer.findById(req.params.id).then((result) => {
+     res.render("view", {data: result})
+    console.log(result)
+  }).catch((err) => {
+    console.log(err)
+  })
+} )
 
 
 
