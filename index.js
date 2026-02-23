@@ -6,7 +6,8 @@ app.use(express.urlencoded({ extended: true }));
 app.set("view engine" , "ejs")
 app.use(express.static("public"))
 var moment = require('moment'); // require
-
+var methodOverride = require('method-override')
+app.use(methodOverride('_method'))
 
 
 
@@ -39,7 +40,7 @@ const Customer = require("./models/addCustomer")
 
 mongoose
   .connect(
-    "mongodb+srv://jones6199:6jQQMRfu0ZZWkjDe@cluster0.nev1f0f.mongodb.net/all-data?appName=Cluster0",
+    "mongodb+srv://jones6199:TuEG6BLY5xIKjfec@cluster0.nev1f0f.mongodb.net/all-data?appName=Cluster0",
   )
   .then(() => {  
     console.log("Connected to database succesfully");
@@ -69,7 +70,7 @@ app.post("/", (req, res) => {
 });
 
 
-
+  
 
 /* home */
 app.get("/", (req, res) => {
@@ -98,11 +99,18 @@ app.get("/user/view.html", (req, res) => {
 
 
 /* edit user  */
-app.get("/user/edit.html", (req, res) => {
-  res.render("edit" )
+app.get("/edit/:id", (req, res) => {
+  
+
+  Customer.findById(req.params.id).then((result) => {
+    res.render("edit" , {result: result, moment: moment})
+   
+  }).catch((err) => {
+    console.log(err)
+  })
 });   
 
-/*  edit user */
+/* // edit user */
 
 
 /* add customer */
@@ -128,7 +136,7 @@ app.post("/user/add.html", (req,res) => {
 
 
 
-app.get("/user/:id",(req,res) => {
+app.get("/view/:id",(req,res) => {
  
   Customer.findById(req.params.id).then((result) => {
      res.render("view", {data: result, moment: moment })
@@ -145,8 +153,15 @@ app.get("/user/:id",(req,res) => {
 
 
 
-
-
+app.delete("/edit/:id", (req, res) => {
+  Customer.deleteOne({_id: req.params.id}).then((result) => {
+  res.redirect("/")
+  console.log("deleted customer from database")
+  console.log(result)
+}).catch((err) => {
+    console.log("failed")
+  })
+}); 
 
 
 

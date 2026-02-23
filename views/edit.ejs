@@ -367,9 +367,13 @@
               >
                 Close
               </button>
-              <button type="button" class="btn btn-danger">
-                Delete
-              </button>
+             
+              <form method="post"  action="/edit/<%= result._id  %>?_method=DELETE">
+                 <button type="submit" class="btn btn-danger">
+                   Delete
+                 </button>
+              </form>
+             
             </div>
           </div>
         </div>
