@@ -5,6 +5,8 @@ const mongoose = require("mongoose");
 app.use(express.urlencoded({ extended: true }));
 app.set("view engine" , "ejs")
 app.use(express.static("public"))
+var moment = require('moment'); // require
+
 
 
 
@@ -37,7 +39,7 @@ const Customer = require("./models/addCustomer")
 
 mongoose
   .connect(
-    "mongodb+srv://jones6199:RcKPNfK8QBePnkZO@cluster0.nev1f0f.mongodb.net/all-data?appName=Cluster0",
+    "mongodb+srv://jones6199:6jQQMRfu0ZZWkjDe@cluster0.nev1f0f.mongodb.net/all-data?appName=Cluster0",
   )
   .then(() => {  
     console.log("Connected to database succesfully");
@@ -74,7 +76,7 @@ app.get("/", (req, res) => {
  
 
   Customer.find().then((result) => {
-    res.render("index" , {data: result})
+    res.render("index" , {data: result, moment: moment })
   }).catch((err) => {
     console.log(`operation failed due ${err}`)
   })
@@ -87,7 +89,7 @@ app.get("/user/view.html", (req, res) => {
   
 
   Customer.find().then((result) => {
-    res.render("view", {data: result} )
+    res.render("view", {data: result, moment: moment} )
   }).catch((err) => {
     console.log(`operation failed due ${err}`)
   })
@@ -129,7 +131,7 @@ app.post("/user/add.html", (req,res) => {
 app.get("/user/:id",(req,res) => {
  
   Customer.findById(req.params.id).then((result) => {
-     res.render("view", {data: result})
+     res.render("view", {data: result, moment: moment })
     console.log(result)
   }).catch((err) => {
     console.log(err)

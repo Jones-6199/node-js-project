@@ -253,7 +253,7 @@
               <td><%= i.customerGender %>	</td>
               <td> <%= i.customerCountry %> </td>
               <td> <%= i.customerAge %> </td>
-              <td>1 days ago              </td>
+              <td>  <%= moment(i.updatedAt).fromNow() %>           </td>
               <td>
                 <a
                   data-bs-toggle="tooltip"

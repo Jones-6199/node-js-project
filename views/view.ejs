@@ -288,12 +288,12 @@
 
             <tr>
               <th scope="row">Created on</th>
-              <td>Test6</td>
+              <td> <%= moment(data.createdAt).fromNow()  %> </td>
             </tr>
 
             <tr>
               <th scope="row">Last Update</th>
-              <td>Test7</td>
+              <td> <%= moment(data.updatedAt).fromNow()  %> </td>
             </tr>
           </tbody>
         </table>

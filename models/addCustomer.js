@@ -29,7 +29,7 @@ const addcustomerSchema = Schema({
     type: String,
     required: true,
   },
-});
+}, {timestamps: true});
 
 const Customer = mongoose.model("Customer", addcustomerSchema);
 
